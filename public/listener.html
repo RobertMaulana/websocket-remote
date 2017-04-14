@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Remote</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+  </head>
+  <body>
+    <div class="carousel carousel-slider">
+       <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/800/400/food/1"></a>
+       <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/800/400/food/2"></a>
+       <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/800/400/food/3"></a>
+       <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/800/400/food/4"></a>
+     </div>
+    <button type="button" id="prev">Prev</button>
+    <button type="button" id="next">Next</button>
+  </body>
+  <script type="text/javascript">
+
+      $('.carousel.carousel-slider').carousel({fullWidth: true});
+
+      var config = {
+        apiKey: "AIzaSyAJFz9TdfeLiSRUv7dw_o7nK8_qiKnNeec",
+        authDomain: "test-fbfa7.firebaseapp.com",
+        databaseURL: "https://test-fbfa7.firebaseio.com",
+        projectId: "test-fbfa7",
+        storageBucket: "test-fbfa7.appspot.com",
+        messagingSenderId: "374271903483"
+      };
+      firebase.initializeApp(config);
+
+        var starCountRef = firebase.database().ref('corousel/');
+        starCountRef.on('value', function(snapshot) {
+          if (snapshot.val().event == "prev") {
+            $('.carousel').carousel('prev');
+          }else if (snapshot.val().event == "next") {
+            $('.carousel').carousel('next');
+          }
+        });
+
+  </script>
+</html>

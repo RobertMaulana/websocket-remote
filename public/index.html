@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Remote</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script> -->
+  </head>
+  <body>
+    <div class="carousel carousel-slider">
+       <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/800/400/food/1"></a>
+       <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/800/400/food/2"></a>
+       <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/800/400/food/3"></a>
+       <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/800/400/food/4"></a>
+     </div>
+    <button type="button" id="prev">Prev</button>
+    <button type="button" id="next">Next</button>
+  </body>
+  <script type="text/javascript">
+
+      $('.carousel.carousel-slider').carousel({fullWidth: true});
+
+      $("#prev").on("click", function(){
+          $.ajax({
+            url: "/corousel/prev",
+            method: "post",
+            data: {event: "prev"},
+            success: function(data){
+              console.log(data);
+            }
+          })
+          $('.carousel').carousel('prev');
+      })
+
+      $("#next").on("click", function(){
+          $.ajax({
+            url: "/corousel/next",
+            method: "post",
+            data: {event: "next"},
+            success: function(data){
+              console.log(data);
+            }
+          })
+          $('.carousel').carousel('prev');
+      })
+
+  </script>
+</html>
